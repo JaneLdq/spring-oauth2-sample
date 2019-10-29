@@ -1,0 +1,17 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+    <meta charset="utf-8" />
+    <link type="text/css" rel="stylesheet"
+          href="webjars/bootstrap/3.0.3/css/bootstrap.min.css" />
+    <script type="text/javascript"
+            src="webjars/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1 th:text="'Hello, ' + ${username}" />
+        <p>Welcome to the Home Page.</p>
+    </div>
+</body>
+</html>
