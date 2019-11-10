@@ -17,6 +17,8 @@ import org.springframework.security.oauth2.provider.token.store.InMemoryTokenSto
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
+    private static final Integer THIRTY_DAYS = 60 * 60 * 24 * 30;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -32,8 +34,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .withClient("foo")
                     .secret(passwordEncoder.encode("secret"))
                     .scopes("read", "write")
-                    .authorizedGrantTypes("password", "authorization_code", "refresh_token", "implicit")
-                    .redirectUris("http://localhost:8081");
+                    .authorities("ROLE_CLIENT")
+                    .authorizedGrantTypes("password", "authorization_code")
+                    .redirectUris("http://localhost:8081/book-viewer/callback")
+                    .accessTokenValiditySeconds(300)
+                    .refreshTokenValiditySeconds(THIRTY_DAYS);
     }
 
     @Override

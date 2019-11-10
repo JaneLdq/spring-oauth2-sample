@@ -1,4 +1,4 @@
-package com.example.oauth.server.config;
+package com.example.oauth.client.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;

@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -43,12 +44,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // @formatter:off
         http.authorizeRequests()
                 .antMatchers("/login").permitAll()
-                .antMatchers("/admin**").hasRole("ADMIN")
+                .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().hasRole("USER")
                 .and()
              .formLogin()
                 .and()
-             .csrf().disable();
+             .csrf()
+                .requireCsrfProtectionMatcher(new AntPathRequestMatcher("/oauth/authorize"))
+                .disable();
         // @formatter:on
     }
 

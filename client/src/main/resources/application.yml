@@ -1,0 +1,13 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /book-viewer
+
+sample:
+  client:
+    clientId: foo
+    clientSecret: secret
+    accessTokenUri: http://localhost:8082/book-server/oauth/token
+    userAuthorizationUri: http://localhost:8082/book-server/oauth/authorize
+  resource:
+    bookListURL: http://localhost:8082/book-server/api/books

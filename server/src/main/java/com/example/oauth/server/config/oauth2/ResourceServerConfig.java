@@ -7,15 +7,15 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 
-//@Configuration
-//@EnableResourceServer
+@Configuration
+@EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
-    private static final String DEMO_RESOURCE_ID = "demo";
+    private static final String RESOURCE_ID = "sample";
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-        resources.resourceId(DEMO_RESOURCE_ID).stateless(false);
+        resources.resourceId(RESOURCE_ID).stateless(false);
     }
 
     @Override
@@ -30,7 +30,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers("/api/**")
             .and()
             .authorizeRequests()
-                .antMatchers("/api/photos/**").access("#oauth2.hasScope('read') or (!#oauth2.isOAuth() and hasRole('ROLE_USER'))");
+                .antMatchers("/api/**").access("#oauth2.hasScope('read') or (!#oauth2.isOAuth() and hasRole('ROLE_USER'))");
         // @formatter:on
     }
 }
